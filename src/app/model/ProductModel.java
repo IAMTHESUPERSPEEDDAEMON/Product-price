@@ -4,6 +4,8 @@ import app.entity.Product;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ProductModel {
     public List<Product> products = Arrays.asList(
@@ -15,6 +17,15 @@ public class ProductModel {
 
     public List<Product> getProducts() {
         return products;
+    }
+
+    public static Map<String, Double> calculateMaxPricesByCategory(List<Product> products) {
+        return products.stream()
+                .collect(Collectors.groupingBy(Product::getCategory, Collectors.collectingAndThen(
+                        Collectors.maxBy((p1, p2) ->
+                                Double.compare(p1.getPrice(), p2.getPrice())),
+                        maxProduct -> maxProduct.map(Product::getPrice).orElse(0.0)
+                )));
     }
 
 }
