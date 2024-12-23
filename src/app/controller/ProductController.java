@@ -1,7 +1,8 @@
 package app.controller;
 
-import app.model.Product;
+import app.entity.Product;
 import app.view.ProductView;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -10,9 +11,11 @@ public class ProductController {
     private List<Product> products;
     private ProductView view;
 
-    public ProductController(List<Product> products, ProductView view) {
+
+    public ProductController(List<Product> products) {
         this.products = products;
-        this.view = view;
+        this.view = new ProductView();
+
     }
     public void findAndDisplayMaxPricesByCategory() {
         Map<String, Double> maxPrices = calculateMaxPricesByCategory();
