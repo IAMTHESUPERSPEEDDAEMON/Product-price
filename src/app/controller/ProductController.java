@@ -12,8 +12,8 @@ public class ProductController {
     private ProductView view;
 
 
-    public ProductController(List<Product> products) {
-        this.products = products;
+    public ProductController() {
+        this.products = new ProductModel().getProducts();
         this.view = new ProductView();
 
     }
